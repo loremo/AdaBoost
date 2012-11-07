@@ -2,6 +2,8 @@ package core;
 
 import java.util.ArrayList;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import classifier.IClassifier;
 
 public class GlobalSettings {
@@ -32,5 +34,14 @@ public class GlobalSettings {
 
 	public void addClassifier(IClassifier classifier) {
 		classifiers.add(classifier);
+	}
+	
+	@Override
+	public String toString() {
+		String s = filepath + " | " + percentage + "%\n";
+		for (IClassifier classifier : classifiers) {
+			s += classifier.toString() + "\n";
+		}
+		return s;
 	}
 }

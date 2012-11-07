@@ -6,6 +6,7 @@ public class DecisionTreeClassifier implements IClassifier {
 	
 	ArrayList<IHypothese> hypotheses = new ArrayList<IHypothese>();
 	int depth = -1;
+	int numberOfHypotheses = -1;
 	
 	public DecisionTreeClassifier(int depth) {
 		this.depth = depth;
@@ -13,13 +14,12 @@ public class DecisionTreeClassifier implements IClassifier {
 
 	@Override
 	public void setNoOfHypotheses(int no) {
-		// TODO do it
+		this.numberOfHypotheses = no;
 	}
 
 	@Override
 	public int getNoOfHypotheses() {
-		// TODO do it
-		return 0;
+		return numberOfHypotheses;
 	}
 
 	@Override
@@ -31,5 +31,10 @@ public class DecisionTreeClassifier implements IClassifier {
 	@Override
 	public ArrayList<IHypothese> getHypotheses() {
 		return hypotheses;
+	}
+	
+	@Override
+	public String toString() {
+		return "DTC-" + depth + " | Number of hypotheses: " + numberOfHypotheses;
 	}
 }

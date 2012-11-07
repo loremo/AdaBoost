@@ -8,6 +8,7 @@ public class Main {
 	public static void main(String[] args) {
 		// parse arguments
 		GlobalSettings settings = ArgParser.parseArgs(args);
+		System.out.println(settings);
 
 		// preprocess data
 		Preprocessor preprocessor = new Preprocessor(settings);

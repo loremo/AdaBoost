@@ -7,14 +7,15 @@ import classifier.IClassifier;
 
 public class ArgParser {
 
-	public static GlobalSettings parseArgs(String[] args) {
+	public static GlobalSettings parseArgs(String[] argss) {
+		String[] args = {"-f", "bla", "-p", "80", "-c", "10", "NBC", "-c", "10", "DTC", "10"};
 		if (args.length == 0) {
 			return interactiveArgs();
 		}
 		String errorMessage = "Usage: -f FILE -p PROCENTAGE -c NUMBEROFHYPOTHESIS CLASSIFIER [ARG]\n";
 		errorMessage += "where CLASSIFIER can be:\n";
 		errorMessage += "\tNBC\t(Naive Bayes Classifier)\n";
-		errorMessage += "\tDRC N\t(Decision Tree Classifier with depth N[default: max depth])\n";
+		errorMessage += "\tDTC N\t(Decision Tree Classifier with depth N[default: max depth])\n";
 		GlobalSettings settings = new GlobalSettings();
 		try {
 			for (int i = 0; i < args.length; i++) {

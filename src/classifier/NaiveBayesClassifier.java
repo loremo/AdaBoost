@@ -5,16 +5,16 @@ import java.util.ArrayList;
 public class NaiveBayesClassifier implements IClassifier {
 
 	ArrayList<IHypothese> hypotheses = new ArrayList<IHypothese>();
-
+	int numberOfHypotheses = -1;
+	
 	@Override
 	public void setNoOfHypotheses(int no) {
-		// TODO do it
+		this.numberOfHypotheses = no;
 	}
 
 	@Override
 	public int getNoOfHypotheses() {
-		// TODO do it
-		return 0;
+		return numberOfHypotheses;
 	}
 
 	@Override
@@ -26,5 +26,10 @@ public class NaiveBayesClassifier implements IClassifier {
 	@Override
 	public ArrayList<IHypothese> getHypotheses() {
 		return hypotheses;
+	}
+	
+	@Override
+	public String toString() {
+		return "NBC" + " | Number of hypotheses: " + numberOfHypotheses;
 	}
 }
