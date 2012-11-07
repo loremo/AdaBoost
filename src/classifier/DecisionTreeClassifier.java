@@ -5,6 +5,11 @@ import java.util.ArrayList;
 public class DecisionTreeClassifier implements IClassifier {
 	
 	ArrayList<IHypothese> hypotheses = new ArrayList<IHypothese>();
+	int depth = -1;
+	
+	public DecisionTreeClassifier(int depth) {
+		this.depth = depth;
+	}
 
 	@Override
 	public void setNoOfHypotheses(int no) {

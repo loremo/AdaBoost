@@ -17,7 +17,7 @@ public class Test {
 	public Result test(Data data) {
 		Result result = new Result();
 		for (Feature feature : data.getTestFeatures()) {
-			for (IClassifier classifier : settings.getClassifier()) {
+			for (IClassifier classifier : settings.getClassifiers()) {
 				for (IHypothese hypotheses : classifier.getHypotheses()) {
 					result.add(hypotheses.evaluate(feature));
 				}

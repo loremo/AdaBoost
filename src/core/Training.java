@@ -12,7 +12,7 @@ public class Training {
 	}
 
 	public void train(Data data) {
-		for (IClassifier classifier : settings.getClassifier()) {
+		for (IClassifier classifier : settings.getClassifiers()) {
 			for (int i = 0; i < classifier.getNoOfHypotheses(); i++) {
 				classifier.generateHypothese();
 				updateWeights(); // TODO parameters and return type?
