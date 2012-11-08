@@ -3,7 +3,7 @@ package core;
 import classifier.IClassifier;
 import classifier.IHypothese;
 import data.Data;
-import data.Feature;
+import data.Instance;
 import data.Result;
 
 public class Test {
@@ -16,7 +16,7 @@ public class Test {
 
 	public Result test(Data data) {
 		Result result = new Result();
-		for (Feature feature : data.getTestFeatures()) {
+		for (Instance feature : data.getTestData()) {
 			for (IClassifier classifier : settings.getClassifiers()) {
 				for (IHypothese hypotheses : classifier.getHypotheses()) {
 					result.add(hypotheses.evaluate(feature));

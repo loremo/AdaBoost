@@ -2,8 +2,6 @@ package core;
 
 import java.util.ArrayList;
 
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import classifier.IClassifier;
 
 public class GlobalSettings {

@@ -1,24 +1,25 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Data {
-	private ArrayList<Feature> trainFeatures = new ArrayList<Feature>();
-	private ArrayList<Feature> testFeatures = new ArrayList<Feature>();
+	private List<Instance> trainData = new ArrayList<Instance>();
+	private List<Instance> testData = new ArrayList<Instance>();
 
-	public ArrayList<Feature> getTrainFeatures() {
-		return trainFeatures;
+	public List<Instance> getTrainData() {
+		return trainData;
 	}
 
-	public void setTrainFeatures(ArrayList<Feature> trainFeatures) {
-		this.trainFeatures = trainFeatures;
+	public void setTrainData(List<Instance> trainData) {
+		this.trainData = trainData;
 	}
 
-	public ArrayList<Feature> getTestFeatures() {
-		return testFeatures;
+	public List<Instance> getTestData() {
+		return testData;
 	}
 
-	public void setTestFeatures(ArrayList<Feature> testFeatures) {
-		this.testFeatures = testFeatures;
+	public void setTestData(List<Instance> testData) {
+		this.testData = testData;
 	}
 }
