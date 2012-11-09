@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import data.Data;
 import data.Instance;
+import data.preprocessing.Preprocessor;
 
 public class PreprocessorTest {
 
@@ -49,7 +50,7 @@ public class PreprocessorTest {
 
 		settings.setFilepath(filename);
 		preprocessor = new Preprocessor(settings);
-		Data data = preprocessor.preprocessData();
+		Data data = preprocessor.getData();
 		assertEquals(6, data.getTestData().size() + data.getTrainData().size());
 	}
 
@@ -82,7 +83,7 @@ public class PreprocessorTest {
 		settings.setFilepath(filename);
 		settings.setPercentage(100);
 		preprocessor = new Preprocessor(settings);
-		Data data = preprocessor.preprocessData();
+		Data data = preprocessor.getData();
 		int firstclass = 0;
 		int secondclass = 0;
 		for (Instance instance : data.getTrainData()) {

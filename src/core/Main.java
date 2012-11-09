@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import data.Data;
 import data.Result;
+import data.preprocessing.Preprocessor;
 
 public class Main {
 
@@ -14,7 +15,7 @@ public class Main {
 
 		// preprocess data
 		Preprocessor preprocessor = new Preprocessor(settings);
-		Data data = preprocessor.preprocessData();
+		Data data = preprocessor.getData();
 
 		// train classifiers
 		Training training = new Training(settings);
