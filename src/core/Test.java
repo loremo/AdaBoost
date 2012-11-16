@@ -62,9 +62,7 @@ public class Test {
 		ArrayList<Double> deviations = new ArrayList<Double>();
 		for (IClassifier classifier : settings.getClassifiers()) {
 			ArrayList<Double> accuracies = new ArrayList<Double>(classifier.getHypotheses().size());
-			int count = 0; // TODO: delete
 			for (IHypothesis hypothesis : classifier.getHypotheses()) {
-				count++;
 				int hits = 0;
 				int misses = 0;
 				for (Integer label : labels) {
@@ -78,13 +76,7 @@ public class Test {
 					}
 				}
 				double accuracy = (double) hits / (double) (hits + misses);
-				if (count == 19) {
-					System.out.println("test");
-				}
 				accuracies.add(accuracy);
-			}
-			for (Double accuracy : accuracies) {
-				System.out.println("train accuracy: " + accuracy);
 			}
 			double accuraciesSum = 0;
 			for (Double accuracy : accuracies) {

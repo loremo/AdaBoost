@@ -21,9 +21,6 @@ public class DecisionTreeHypothesis implements IHypothesis {
 		Set<Integer> values;
 
 		while ((features = subTree.keySet()) != null) {
-			if (features.size() != 1) { // TODO: delete
-				System.out.println("ERROR");
-			}
 			int feature = (Integer) features.toArray()[0];
 			try {
 				values = ((HashMap) subTree.get(feature)).keySet();

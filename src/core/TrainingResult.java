@@ -20,7 +20,10 @@ public class TrainingResult {
 		for (int i = 0; i < settings.getClassifiers().size(); i++) {
 			s += settings.getClassifiers().get(i) + ":\n";
 			s += "\tAverage           : " + averages.get(i) + "\n";
-			s += "\tStandard deviation: " + deviations.get(i) + "\n";
+			s += "\tStandard deviation: " + deviations.get(i);
+			if(i < settings.getClassifiers().size() - 1) {
+				s += "\n";
+			}
 		}
 		return s;
 	}

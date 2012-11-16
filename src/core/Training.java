@@ -41,10 +41,6 @@ public class Training {
 
 		double numLabels = data.getTrainData().keySet().size();
 
-		if (((Double) error).isNaN()) { // TODO: delete
-			System.out.println("error is NaN");
-		}
-
 		if (error >= ((numLabels - 1.0) / numLabels)) {
 			jiggleWeights(data, beta);
 			return false;
@@ -72,8 +68,6 @@ public class Training {
 			hypothesis.setWeight(10.0 + Math.log(numLabels - 1));
 
 		}
-
-		System.out.println("error of hypothesis: " + error);
 		return true;
 	}
 
@@ -96,13 +90,6 @@ public class Training {
 		double weightsSum = 0;
 		for (Instance instance : data.getListOfTrainInstances()) {
 			weightsSum += instance.getWeight();
-			if (instance.getWeight() == Double.NaN) { // TODO: delete
-				System.out.println("test");
-			}
-		}
-		if (weightsSum == 0.0) { // TODO: delete
-			System.out.println("test");
-			
 		}
 		for (Instance instance : data.getListOfTrainInstances()) {
 			instance.setWeight(instance.getWeight() / weightsSum);

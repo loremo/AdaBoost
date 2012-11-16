@@ -124,9 +124,6 @@ public class DecisionTreeClassifier implements IClassifier {
 			for (Instance instance : instancesPerValue.get(feature).get(value)) {
 				probabilityPerValue += instance.getWeight();
 			}
-			if (probabilityPerValue == 0.0) { //TODO: delete
-				System.out.println("debug");
-			}
 			for (Instance instance : instancesPerValue.get(feature).get(value)) {
 				if (!probabilitiesPerLabel.containsKey(instance.getLabel())) {
 					probabilitiesPerLabel.put(instance.getLabel(), instance.getWeight());
