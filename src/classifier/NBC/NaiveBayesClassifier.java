@@ -1,6 +1,7 @@
 package classifier.NBC;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -9,6 +10,7 @@ import classifier.IClassifier;
 import classifier.IHypothesis;
 import data.Data;
 import data.Instance;
+import data.preprocessing.DataDiscretizer;
 
 public class NaiveBayesClassifier implements IClassifier {
 
@@ -27,10 +29,48 @@ public class NaiveBayesClassifier implements IClassifier {
 
 	@Override
 	public void generateHypothese(Data data) {
+		// <label, probability>
+		HashMap<Integer, Double> aprioriProbabilities = computeAprioriProbabilities(data);
+		
+		// [label][feature][value]
+		double[][][] conditionalProbabilities = computeConditionalProbabilites(data, aprioriProbabilities);;
+
+		NaiveBayesHypothesis hypothesis = new NaiveBayesHypothesis();
+		hypothesis.setConditionalProbabilities(conditionalProbabilities);
+		hypothesis.setAprioriProbabilities(aprioriProbabilities);
+		Set<Integer> labels = data.getTrainData().keySet();
+		hypothesis.setLabels(labels);
+		this.hypotheses.add(hypothesis);
+	}
+
+	private double[][][] computeConditionalProbabilites(Data data, HashMap<Integer, Double> aprioriProbabilities) {
+		double[][][] conProbs = new double[Collections.max(data.getTrainData().keySet()) + 1][data.getNumberOfFeatures()][DataDiscretizer.NUMBEROFINTERVALS];
+		
+		Set<Integer> labels = data.getTrainData().keySet();
+		// compute conditional probabilities
+		for (Integer label : labels) {
+			List<Instance> instancesWithSameLabel = data.getTrainData().get(label);
+			for (Instance instance : instancesWithSameLabel) {
+				for (int i = 0; i < instance.getFeatures().size(); i++) {
+					conProbs[label][i][instance.getFeatures().get(i)] += instance.getWeight();
+				}
+			}
+		}
+
+		for (Integer label : labels) {
+			for (int i = 0; i < conProbs[0].length; i++) {
+				for (int j = 0; j < conProbs[0][0].length; j++) {
+					conProbs[label][i][j] /= aprioriProbabilities.get(label);
+				}
+			}
+		}
+		return conProbs;
+	}
+
+	private HashMap<Integer, Double> computeAprioriProbabilities(Data data) {
 		HashMap<Integer, Double> aprioriProbabilities = new HashMap<Integer, Double>();
 
 		Set<Integer> labels = data.getTrainData().keySet();
-
 		// compute apriori probabilities for each label
 		for (Integer label : labels) {
 			List<Instance> instancesWithSameLabel = data.getTrainData().get(label);
@@ -40,56 +80,8 @@ public class NaiveBayesClassifier implements IClassifier {
 			}
 			aprioriProbabilities.put(label, apriori);
 		}
+		return aprioriProbabilities;
 
-		// <Feature, <Value, <Label, Weight>>>
-		HashMap<Integer, HashMap<Integer, HashMap<Integer, Double>>> conditionalProbabilities = new HashMap<Integer, HashMap<Integer, HashMap<Integer, Double>>>();
-		// compute conditional probabilities
-		for (Integer label : labels) {
-			List<Instance> instancesWithSameLabel = data.getTrainData().get(label);
-			for (Instance instance : instancesWithSameLabel) {
-				for (int i = 0; i < instance.getFeatures().size(); i++) {
-					if (!conditionalProbabilities.containsKey(i)) { // no such feature
-						HashMap<Integer, HashMap<Integer, Double>> value_labels = new HashMap<Integer, HashMap<Integer, Double>>();
-						HashMap<Integer, Double> label_weights = new HashMap<Integer, Double>();
-						label_weights.put(label, instance.getWeight());
-						value_labels.put(instance.getFeatures().get(i), label_weights);
-						conditionalProbabilities.put(i, value_labels);
-					} else {
-						if (!conditionalProbabilities.get(i).containsKey(instance.getFeatures().get(i))) { // no such value
-							HashMap<Integer, Double> label_weights = new HashMap<Integer, Double>();
-							label_weights.put(label, instance.getWeight());
-							conditionalProbabilities.get(i).put(instance.getFeatures().get(i), label_weights);
-						} else {
-							if (!conditionalProbabilities.get(i).get(instance.getFeatures().get(i)).containsKey(label)) { // no such label
-								conditionalProbabilities.get(i).get(instance.getFeatures().get(i)).put(label, instance.getWeight());
-							} else { // the needed entry exists, only an update of weight is needed
-								double currentWeight = conditionalProbabilities.get(i).get(instance.getFeatures().get(i)).get(label);
-								currentWeight += instance.getWeight();
-								conditionalProbabilities.get(i).get(instance.getFeatures().get(i)).put(label, currentWeight);
-							}
-						}
-					}
-				}
-			}
-		}
-		Set<Integer> features = conditionalProbabilities.keySet();
-		for (Integer feature : features) {
-			Set<Integer> values = conditionalProbabilities.get(feature).keySet();
-			for (Integer value : values) {
-				Set<Integer> labelsProbabilities = conditionalProbabilities.get(feature).get(value).keySet();
-				for (Integer labelsProbability : labelsProbabilities) {
-					double conditionalProbability = conditionalProbabilities.get(feature).get(value).get(labelsProbability)
-							/ aprioriProbabilities.get(labelsProbability);
-					conditionalProbabilities.get(feature).get(value).put(labelsProbability, conditionalProbability);
-				}
-
-			}
-		}
-		NaiveBayesHypothesis hypothesis = new NaiveBayesHypothesis();
-		hypothesis.setConditionalProbabilities(conditionalProbabilities);
-		hypothesis.setAprioriProbabilities(aprioriProbabilities);
-		hypothesis.setLabels(labels);
-		this.hypotheses.add(hypothesis);
 	}
 
 	@Override
@@ -100,10 +92,5 @@ public class NaiveBayesClassifier implements IClassifier {
 	@Override
 	public String toString() {
 		return "NBC" + " | Number of hypotheses: " + numberOfHypotheses;
-	}
-	
-	@Override
-	public String toStringShort() {
-		return "NBC";
 	}
 }
