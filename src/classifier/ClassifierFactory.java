@@ -2,6 +2,9 @@ package classifier;
 
 import java.util.Scanner;
 
+import classifier.DTC.DecisionTreeClassifier;
+import classifier.NBC.NaiveBayesClassifier;
+
 public class ClassifierFactory {
 
 	public static IClassifier createClassifier(String[] args, int i)

@@ -7,8 +7,7 @@ import classifier.IClassifier;
 
 public class ArgParser {
 
-	public static GlobalSettings parseArgs(String[] argss) {
-		String[] args = {"-f", "bla", "-p", "80", "-c", "10", "NBC", "-c", "10", "DTC", "10"};
+	public static GlobalSettings parseArgs(String[] args) {
 		if (args.length == 0) {
 			return interactiveArgs();
 		}

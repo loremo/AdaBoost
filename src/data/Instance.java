@@ -30,4 +30,8 @@ public class Instance {
 	public void addFeature(int value) {
 		features.add(value);
 	}
+	@Override
+	public String toString() {
+		return features + ": " + label + "( " + weight + " )\n";
+	}
 }

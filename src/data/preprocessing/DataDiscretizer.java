@@ -8,9 +8,10 @@ import data.ClassIntervals;
 import data.Instance;
 
 public class DataDiscretizer {
-	
-	ArrayList<ArrayList<Float>> data = null;
-	int numberOfFeatures = -1;
+
+	private ArrayList<ArrayList<Float>> data = null;
+	private int numberOfFeatures = -1;
+	private ArrayList<Integer> numberOfDiscretizedClasses = new ArrayList<Integer>();
 
 	public DataDiscretizer(ArrayList<ArrayList<Float>> rawData) {
 		this.data = rawData;
@@ -24,12 +25,12 @@ public class DataDiscretizer {
 		for (ArrayList<Float> instance : data) {
 			Instance features = new Instance();
 			for (int i = 0; i < numberOfFeatures; i++) {
-				for(int j = 0; j < numOfIntervals; j++) {
+				for (int j = 0; j < numOfIntervals; j++) {
 					if (instance.get(i) <= intervals.get(i).getIntervals().get(j)) {
 						features.addFeature(j);
 						break;
 					} else if (j == numOfIntervals - 1) {
-						features.addFeature(numOfIntervals);						
+						features.addFeature(numOfIntervals);
 					}
 				}
 			}
@@ -41,8 +42,12 @@ public class DataDiscretizer {
 	}
 
 	private ArrayList<ClassIntervals> computeIntervalls() {
-		int numberOfClasses = Math.max((int) Math.pow(data.size(), 1.0 / 3.0), 2); // N^(1/3)
-		int sampleSize = (int) (Math.log(data.size()) * 42);
+		// TODO: actual number of classes < computed number of classes
+		// int numberOfIntervals = Math.max((int) Math.ceil(Math.pow(data.size(), 1.0 / 20.0)), 3); // N^(1/3)
+		int numberOfIntervals = 5;
+
+//		int sampleSize = (int) (Math.log(data.size()) * 42); // TODO: uncomment again
+		 int sampleSize = data.size();
 		if (sampleSize > data.size()) {
 			sampleSize = data.size();
 		}
@@ -60,15 +65,19 @@ public class DataDiscretizer {
 			Collections.sort(samples.get(i));
 		}
 		ArrayList<ClassIntervals> intervals = new ArrayList<ClassIntervals>();
-		double intervalSize = (double) sampleSize / (double) numberOfClasses;
+		double intervalSize = (double) sampleSize / (double) numberOfIntervals;
 		for (int i = 0; i < numberOfFeatures; i++) {
 			ClassIntervals intervallForOneAttribute = new ClassIntervals();
-			for (int j = 1; j < numberOfClasses; j++) {
+			for (int j = 1; j < numberOfIntervals; j++) {
 				intervallForOneAttribute.addIntervallThreshold(samples.get(i).get((int) (j * intervalSize)));
 			}
 			intervals.add(intervallForOneAttribute);
 		}
 		return intervals;
+	}
+
+	public ArrayList<Integer> getNumberOfDiscretizedClasses() {
+		return numberOfDiscretizedClasses;
 	}
 
 	private ArrayList<Integer> randomWithoutDuplicates(int size, int range) {
