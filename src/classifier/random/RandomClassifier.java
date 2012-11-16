@@ -41,4 +41,9 @@ public class RandomClassifier implements IClassifier {
 	public String toString() {
 		return "NBC" + " | Number of hypotheses: " + numberOfHypotheses;
 	}
+	
+	@Override
+	public String toStringShort() {
+		return "NBC";
+	}
 }

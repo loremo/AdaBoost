@@ -1,41 +1,155 @@
-\chapter{Tournament}
-\label{ch:tournament}
-\section{Performance}
-The tournament conists of five groups competing 950 times against each other. Every group uses a MinMax-3 Player with their own evaluation function.
+\chapter{Results}
+\label{ch:results}
 \begin{table}[h]
 	\centering
-	\begin{tabular}[h]{l|l}
-		\textbf{Player} & \textbf{Wins}\\
+	\begin{tabular}[h]{l|l|l|l|l|l}
+		Classifier & No & Depth & Train Acc avg (\%) & Std Deviation & Test Accuracy (\%)\\
 		\hline
-		Annika \& Tim & 2429 \\
-		Nils & 2218 \\
-		Dmitriy \& Tobias & 2117 \\
-		Alessio \& Vincent & 1370 \\
-		Magnus & 16 \\
+		NBC       & 1  & - & 87.8 & - & 87.4 \\
+		DTC       & 1  & A & 100  & - & 91.3 \\
+		NBC       & 5  & - & 65.5 & 30.9 & 86.3 \\
+		NBC       & 10 & - & 59.7 & 38.8 & 87.7 \\
+		NBC       & 20 & - & 58.1 & 49.2 & 85.5 \\
+		DTC       & 5  & A & 86.4 & 13.7 & 91.3 \\
+		DTC       & 10 & 1 & 32.9 & 15.3 & 35.4 \\
+		DTC       & 10 & 2 & 57.4 & 5.3 & 73.1 \\
+		DTC       & 10 & A & 84.5 & 9.1 & 91.6 \\
+		DTC       & 20 & A & 84.6 & 13.1 & 93.8 \\
+		NBC + DTC & 5  & 2 & 65.5 / 57.6 & 30.9 / 8.4 & 87.9 \\
+		NBC + DTC & 10 & 2 & 59.7 / 56.5 & 38.8 / 17.6 & 89.1 \\
+		NBC + DTC & 20 & 2 & 58.1 / 57.3 & 49.2 / 19.5 & 90.1 \\
 	\end{tabular}
+	\caption{pendigits.tra}
 \end{table}
+
 \begin{table}[h]
 	\centering
-	\begin{tabular}[h]{l|l|l|l}
-		\textbf{Dmitriy \& Tobias vs.} & \textbf{Wins} & \textbf{Losses} & \textbf{Ties}\\
+	\begin{tabular}[h]{l|l|l|l|l|l}
+		Classifier & No & Depth & Train Acc avg (\%) & Std Deviation & Test Accuracy (\%)\\
 		\hline
-		Annika \& Tim & 272 & 400 & 278\\
-		Nils & 223 & 240 & 487\\
-		Alessio \& Vincent & 682 & 153 & 115\\
-		Magnus & 942 & 4 & 4\\
+		NBC       & 1  & - & 90.2 & - & 90.8 \\
+		DTC       & 1  & A & 100 & - &  98.6 \\
+		NBC       & 5  & - & 75.7 & 27.8 & 91.4 \\
+		NBC       & 10 & - & 73.5 & 35.4 & 90.5 \\
+		NBC       & 20 & - & 73.1 & 39.7 & 90.1 \\
+		DTC       & 5  & A & 97.1 & 3.6 & 98.6 \\
+		DTC       & 10 & 1 & 70.9 & 0.0 & 71.3 \\
+		DTC       & 10 & 2 & 79.8 & 18.4 & 83.0 \\
+		DTC       & 10 & A & 97.4 & 3.4 & 98.6 \\
+		DTC       & 20 & A & 97.1 & 3.6 & 98.9 \\
+		NBC + DTC & 5  & 2 & 75.1 / 70.4 & 27.8 / 26.5 & 88.8 \\
+		NBC + DTC & 10 & 2 & 73.5 / 75.4 & 35.4 / 25.6 & 90.3 \\
+		NBC + DTC & 20 & 2 & 73.1 / 76.4 & 39.7 / 42.7 & 88.7 \\
 	\end{tabular}
+	\caption{nursery.txt}
 \end{table}
-\section{Experiences}
-%minmax-3
-%definition of action
-Right after the first lecture we formed a tournament group of 5 teams with 8 students from 4 countries in total. The first topic to discuss was the interaction between the programs of the teams. We came up with two approaches. The first one was to keep the source code of all teams in one Java project. This would be very easy to implement but there was a team which was uncertain about the language they will use for the project. Furthermore the source code of each team would be visible to all of the other teams.
 
-The solution we finally chose was to interact between the programms per Std-In/Std-Out. This approach doesn't force the teams to use the same language but needs an additional program (GameMaster) that synchronizes the communication between the teams' programs. Unfortunately it turned out that this approach slows down the execution time significantly, because Std-In/Std-Out communication seems to be quite slow.
+\begin{table}[h]
+	\centering
+	\begin{tabular}[h]{l|l|l|l|l|l}
+		Classifier & No & Depth & Train Acc avg (\%) & Std Deviation & Test Accuracy (\%)\\
+		\hline
+		NBC & 1 & - & 80.2 & - & 79.4 \\
+		DTC & 1 & A & 100 & - & 83 \\
+		NBC & 5 & - & 66.7 & 15.9 & 78.1 \\
+		NBC & 10 & - & 61.7 & 26 & 82 \\
+		NBC & 20 & - & 59.7 & 36.2 & 81.5 \\
+		DTC & 5 & A & 84.4 & 17.5 & 83 \\
+		DTC & 10 & 1 & 50.4 & 1.9 & 50.3 \\
+		DTC & 10 & 2 & 73.6 & 9.1 & 80.8 \\
+		DTC & 10 & A & 77.3 & 27.8 & 83.9 \\
+		DTC & 20 & A & 75.2 & 39.3 & 84.8 \\
+		NBC+DTC & 5 & 2 & 66.7 / 73.6 & 15.9 / 2.2 & 82.6 \\
+		NBC+DTC & 10 & 2 & 61.7 / 72.3 & 26 / 13.2 & 83 \\
+		NBC+DTC & 20 & 2 & 59.7 / 72.8 & 36.2 / 15.5 & 84.9 \\
+	\end{tabular}
+	\caption{sat.trn}
+\end{table}
 
-Implementing the GameMaster was no big deal but it took some time for the teams to implement the protocol in their projects correctly. One major problem was the fact that the teams used different Java versions. There is no backwards compatibility between Java 6 and 7 so if a project was compiled with Java 7 it couldn't be executed on machines with older Java versions. Therefore it was necessary for all teams to upgrade their Java versions.
+\begin{table}[h]
+	\centering
+	\begin{tabular}[h]{l|l|l|l|l|l}
+		Classifier & No & Depth & Train Acc avg (\%) & Std Deviation & Test Accuracy (\%)\\
+		\hline
+		NBC & 1 & -  & 86.9 & - & 89.6 \\
+		DTC & 1 & A  & 99.7 & - & 94.6 \\
+		NBC & 5 & -  & 79.7 & 8.8 & 89.2 \\
+		NBC & 10 & -  & 78.3 & 11.1 & 92.4 \\
+		NBC & 20 & -  & 76.9 & 16.3 & 91.3 \\
+		DTC & 5 &  A & 89.2 & 12.9 & 94.6 \\
+		DTC & 10 & 1  & 51.9 & 1.1 & 55.4 \\
+		DTC & 10 & 2  & 75.1 & 22.6 & 88.7 \\
+		DTC & 10 &  A & 89.2 & 12 & 94.2 \\
+		DTC & 20 &  A & 89.1 & 13.9 & 94.8 \\
+		NBC+DTC & 5 & 2  & 79.7 / 76.8 & 8.8 / 14.7 & 91.6 \\
+		NBC+DTC & 10 & 2  & 78.3 / 76.2 & 11.1 / 16.7 & 92 \\
+		NBC+DTC & 20 & 2  & 76.9 / 70.5 & 16.3 / 35.9 & 93.1 \\
+	\end{tabular}
+	\caption{segment.dat}
+\end{table}
 
-After all the problems have been eliminated a bash script was written to execute the GameMaster for all given programs. There were 10 competitions with 1000 games each. The execution time of the tournament script was 6 hours.
+\begin{table}[h]
+	\centering
+	\begin{tabular}[h]{l|l|l|l|l|l}
+		Classifier & No & Depth & Train Acc avg (\%) & Std Deviation & Test Accuracy (\%)\\
+		\hline
+		NBC & 1 & -  & 72.9 & - & 64.1 \\
+		DTC & 1 & A  & 100 & - & 73.7 \\
+		NBC & 5 & -  & 50.2 & 26.3 & 65.7 \\
+		NBC & 10 & -  & 46.5 & 29 & 68.2 \\
+		NBC & 20 &  - & 44.3 & 31.3 & 69.2 \\
+		DTC & 5 & A  & 82.9 & 21.1 & 73.7 \\
+		DTC & 10 & 1  & 27.7 & 10.6 & 34.8 \\
+		DTC & 10 & 2  & 45.6 & 3.9 & 50 \\
+		DTC & 10 & A  & 82.2 & 24.6 & 75.8 \\
+		DTC & 20 & A  & 80 & 27.2 & 77.3 \\
+		NBC+DTC & 5 & 2  & 50.2 / 42.7 & 26.3 / 5.2 & 70.7 \\
+		NBC+DTC & 10 & 2  & 46.5 / 41.8 & 29 / 6.8 & 70.7 \\
+		NBC+DTC & 20 & 2  & 44.3 / 42.8 & 31.3 / 10.2 & 72.7 \\
+	\end{tabular}
+	\caption{vowel-context.data}
+\end{table}
 
-Although there weren't many points of contact between the teams during the implementation period it was still a lot of fun to develop a protocol collectively and finding bugs in different projects.
+\begin{table}[h]
+	\centering
+	\begin{tabular}[h]{l|l|l|l|l|l}
+		Classifier & No & Depth & Train Acc avg (\%) & Std Deviation & Test Accuracy (\%)\\
+		\hline
+		NBC & 1 & -  & 89.3 & - & 89.7 \\
+		DTC & 1 & A  & 98.8 & - & 94.5 \\
+		NBC & 5 & -  & 74.6 & 18.3 & 90.2 \\
+		NBC & 10 & -  & 67.7 & 35.1 & 92.7 \\
+		NBC & 20 & -  & 63.6 & 66.2 & 91.9 \\
+		DTC & 5 & A  & 97.7 & 2 & 95.1 \\
+		DTC & 10 & 1  & 89.9 & 0 & 89.1 \\
+		DTC & 10 & 2  & 91.9 & 4.6 & 92.7 \\
+		DTC & 10 & A  & 97.3 & 2.5 & 95.2 \\
+		DTC & 20 & A  & 97.3 & 2.6 & 95.3 \\
+		NBC+DTC & 5 & 2  & 74.6 / 90.9 & 18.3 / 1.5 & 90.4 \\
+		NBC+DTC & 10 & 2  & 67.7 / 91.2 & 35.1 / 4.9 & 91.8 \\
+		NBC+DTC & 20 & 2  & 63.6 / 92.9 & 66.2 / 6 & 93 \\
+	\end{tabular}
+	\caption{page-blocks.txt}
+\end{table}
 
-It was a great idea to organize a tournament between different teams. This way you can see the result of your efforts directly and compare it with other teams. Also, working with students from other countries and cultures gave us an insight into their different way of thinking.
+\begin{table}[h]
+	\centering
+	\begin{tabular}[h]{l|l|l|l|l|l}
+		Classifier & No & Depth & Train Acc avg (\%) & Std Deviation & Test Accuracy (\%)\\
+		\hline
+		NBC & 1 & -  & 81.2 & - & 80.3 \\
+		DTC & 1 & A  & 100 & - & 66.9 \\
+		NBC & 5 & -  & 79.7 & 5.1 & 82.1 \\
+		NBC & 10 & -  & 76.6 & 17.4 & 83 \\
+		NBC & 20 & -  & 68.9 & 45.8 & 81.1 \\
+		DTC & 5 & A  & 84 & 20.5 & 66.9 \\
+		DTC & 10 & 1  & 53.9 & 4.7 & 69.9 \\
+		DTC & 10 & 2  & 66.9 & 5.8 & 77.1 \\
+		DTC & 10 & A  & 77.1 & 27.3 & 66.9 \\
+		DTC & 20 & A  & 73.5 & 31 & 67.8 \\
+		NBC+DTC & 5 & 2  & 79.7 / 68.9 & 5.1 / 2.1 & 82.1 \\
+		NBC+DTC & 10 & 2  & 78.3 / 67.2 & 8.9 / 6 & 83.6 \\
+		NBC+DTC & 20 & 2  & 67.3 / 66.7 & 43.4 / 10.7 & 82.1 \\
+	\end{tabular}
+	\caption{waveform.data}
+\end{table}

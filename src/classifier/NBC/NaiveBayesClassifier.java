@@ -101,4 +101,9 @@ public class NaiveBayesClassifier implements IClassifier {
 	public String toString() {
 		return "NBC" + " | Number of hypotheses: " + numberOfHypotheses;
 	}
+	
+	@Override
+	public String toStringShort() {
+		return "NBC";
+	}
 }

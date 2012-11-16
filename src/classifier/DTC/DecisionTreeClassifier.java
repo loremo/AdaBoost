@@ -202,4 +202,9 @@ public class DecisionTreeClassifier implements IClassifier {
 	public String toString() {
 		return "DTC-" + maxDepth + " | Number of hypotheses: " + numberOfHypotheses;
 	}
+	
+	@Override
+	public String toStringShort() {
+		return "DTC";
+	}
 }

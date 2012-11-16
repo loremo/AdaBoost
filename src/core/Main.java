@@ -1,10 +1,11 @@
 package core;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Locale;
 
-import classifier.IClassifier;
-import classifier.IHypothesis;
 import data.Data;
 import data.preprocessing.Preprocessor;
 
@@ -12,7 +13,7 @@ public class Main {
 
 	public static void main(String[] argss) throws IOException {
 
-		String file = "data/pendigits.tra";
+		String file = "data/waveform.data";
 
 		ArrayList<String[]> argsList = new ArrayList<String[]>();
 		String[] args1 = { "-f", file, "-p", "80", "-c", "1", "nbc" };
@@ -62,13 +63,46 @@ public class Main {
 			double testResult = test.testError(data.getTestData());
 			TrainingResult trainingResult = test.trainError(data.getTrainData());
 
-			System.out.println(settings.getFilepath());
-//			System.out.println("number of features: " + data.getNumberOfFeatures());
-//			System.out.println("test instances: " + data.getTestData().size());
-//			System.out.println("Number of classes: " + data.getTrainData().keySet().size());
-			System.out.println(trainingResult);
-			System.out.println("Test accuracy: " + testResult);
-			System.out.println();
+//			System.out.println(settings.getFilepath());
+////			System.out.println("number of features: " + data.getNumberOfFeatures());
+////			System.out.println("test instances: " + data.getTestData().size());
+////			System.out.println("Number of classes: " + data.getTrainData().keySet().size());
+//			System.out.println(trainingResult);
+//			System.out.println("Test accuracy: " + testResult);
+//			System.out.println();
+			
+			// Output for latex-table
+			String s = "";
+			DecimalFormatSymbols otherSymbols = new DecimalFormatSymbols(Locale.GERMAN);
+			otherSymbols.setDecimalSeparator('.');
+			otherSymbols.setGroupingSeparator(','); 
+			DecimalFormat douF = new DecimalFormat("##.#", otherSymbols);
+			for (int i = 0; i < settings.getClassifiers().size(); i++) {
+				s += settings.getClassifiers().get(i).toStringShort();
+				if(i < settings.getClassifiers().size() - 1) {
+					s += "+";
+				}
+			}
+			s += " & " + settings.getClassifiers().get(0).getNoOfHypotheses();
+			s += " &  "; // missing max depth
+			s += " & ";
+			for (int i = 0; i < trainingResult.getAverages().size(); i++) {
+				s += douF.format(trainingResult.getAverages().get(i) * 100);
+				if(i < settings.getClassifiers().size() - 1) {
+					s += " / ";
+				}
+			}
+			s += " & ";
+			for (int i = 0; i < trainingResult.getDeviations().size(); i++) {
+				s += douF.format(trainingResult.getDeviations().get(i) * 100);
+				if(i < settings.getClassifiers().size() - 1) {
+					s += " / ";
+				}
+			}
+			s += " & " + douF.format(testResult * 100);
+			s += " \\\\";
+			System.out.println(s);
+			
 		}
 		System.out.println();
 	}

@@ -15,4 +15,6 @@ public interface IClassifier {
 	public ArrayList<IHypothesis> getHypotheses();
 
 	public String toString();
+
+	String toStringShort();
 }
