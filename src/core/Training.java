@@ -1,5 +1,6 @@
 package core;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import classifier.IClassifier;
@@ -18,7 +19,7 @@ public class Training {
 	public void train(Data data) {
 		for (IClassifier classifier : settings.getClassifiers()) {
 			for (int i = 0; i < classifier.getNoOfHypotheses(); i++) {
-				data.getListOfTrainInstances();
+				ArrayList<Instance> test = data.getListOfTrainInstances();
 				classifier.generateHypothese(data);
 				boolean errorSmallEnough = updateWeights(classifier.getHypotheses().get(classifier.getHypotheses().size() - 1), data);
 				if (!errorSmallEnough) {
