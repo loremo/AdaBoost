@@ -11,7 +11,7 @@ public class Main {
 
 	public static void main(String[] argss) throws IOException {
 
-		String[] args = { "-f", "data/yeast.txt", "-p", "80", "-c", "3", "nbc", "2"};
+		String[] args = { "-f", "data/nursery.txt", "-p", "80", "-c", "20", "nbc", "2"};
 
 		// parse arguments
 		GlobalSettings settings = ArgParser.parseArgs(args);

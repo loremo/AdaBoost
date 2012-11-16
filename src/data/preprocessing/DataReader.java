@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class DataReader {
@@ -22,6 +23,8 @@ public class DataReader {
 		ArrayList<ArrayList<Float>> features = new ArrayList<ArrayList<Float>>();
 		BufferedReader reader = null;
 		try {
+			// <feature, <String, value>>
+			HashMap<Integer, HashMap<String, Integer>> stringToValueMap_perFeature = new HashMap<Integer, HashMap<String,Integer>>();
 			reader = new BufferedReader(new InputStreamReader(new FileInputStream(filepath)));
 			String line;
 			while ((line = reader.readLine()) != null) {
@@ -35,10 +38,23 @@ public class DataReader {
 					try {
 						feature.add(Float.parseFloat(values[i]));
 					} catch (Exception e) {
-						if (!missingAttributes.contains(i)) {
-							missingAttributes.add(i);
+						if (values[i].equals("?")) { // missing value
+							if (!missingAttributes.contains(i)) {
+								missingAttributes.add(i);
+							}
+							feature.add(Float.NaN);							
+						} else { // string value is converted to a int
+							if (!stringToValueMap_perFeature.containsKey(i)) {
+								HashMap<String, Integer> stringToValueMap = new HashMap<String, Integer>();
+								stringToValueMap.put(values[i], 0);
+								stringToValueMap_perFeature.put(i, stringToValueMap);
+							} else {
+								if (!stringToValueMap_perFeature.get(i).containsKey(values[i])) {
+									stringToValueMap_perFeature.get(i).put(values[i], stringToValueMap_perFeature.get(i).size());
+								}
+							}
+							feature.add((float)stringToValueMap_perFeature.get(i).get(values[i]));
 						}
-						feature.add(Float.NaN);
 					}
 				}
 				features.add(feature);

@@ -1,0 +1,8 @@
+att1_1,att2_1,label1
+att1_2,att2_2,label1
+att1_3,att2_3,label2
+att1_4,att2_4,label2
+att1_1,att2_1,label1
+att1_2,att2_2,label1
+att1_3,att2_3,label2
+att1_4,att2_4,label2

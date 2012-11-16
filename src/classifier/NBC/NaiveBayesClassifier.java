@@ -72,15 +72,15 @@ public class NaiveBayesClassifier implements IClassifier {
 				}
 			}
 		}
-		Set<Integer> attributes = conditionalProbabilities.keySet();
-		for (Integer attribute : attributes) {
-			Set<Integer> features = conditionalProbabilities.get(attribute).keySet();
-			for (Integer feature : features) {
-				Set<Integer> labelsProbabilities = conditionalProbabilities.get(attribute).get(feature).keySet();
+		Set<Integer> features = conditionalProbabilities.keySet();
+		for (Integer feature : features) {
+			Set<Integer> values = conditionalProbabilities.get(feature).keySet();
+			for (Integer value : values) {
+				Set<Integer> labelsProbabilities = conditionalProbabilities.get(feature).get(value).keySet();
 				for (Integer labelsProbability : labelsProbabilities) {
-					double conditionalProbability = conditionalProbabilities.get(attribute).get(feature).get(labelsProbability)
+					double conditionalProbability = conditionalProbabilities.get(feature).get(value).get(labelsProbability)
 							/ aprioriProbabilities.get(labelsProbability);
-					conditionalProbabilities.get(attribute).get(feature).put(labelsProbability, conditionalProbability);
+					conditionalProbabilities.get(feature).get(value).put(labelsProbability, conditionalProbability);
 				}
 
 			}
