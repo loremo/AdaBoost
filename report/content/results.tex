@@ -1,0 +1,41 @@
+\chapter{Tournament}
+\label{ch:tournament}
+\section{Performance}
+The tournament conists of five groups competing 950 times against each other. Every group uses a MinMax-3 Player with their own evaluation function.
+\begin{table}[h]
+	\centering
+	\begin{tabular}[h]{l|l}
+		\textbf{Player} & \textbf{Wins}\\
+		\hline
+		Annika \& Tim & 2429 \\
+		Nils & 2218 \\
+		Dmitriy \& Tobias & 2117 \\
+		Alessio \& Vincent & 1370 \\
+		Magnus & 16 \\
+	\end{tabular}
+\end{table}
+\begin{table}[h]
+	\centering
+	\begin{tabular}[h]{l|l|l|l}
+		\textbf{Dmitriy \& Tobias vs.} & \textbf{Wins} & \textbf{Losses} & \textbf{Ties}\\
+		\hline
+		Annika \& Tim & 272 & 400 & 278\\
+		Nils & 223 & 240 & 487\\
+		Alessio \& Vincent & 682 & 153 & 115\\
+		Magnus & 942 & 4 & 4\\
+	\end{tabular}
+\end{table}
+\section{Experiences}
+%minmax-3
+%definition of action
+Right after the first lecture we formed a tournament group of 5 teams with 8 students from 4 countries in total. The first topic to discuss was the interaction between the programs of the teams. We came up with two approaches. The first one was to keep the source code of all teams in one Java project. This would be very easy to implement but there was a team which was uncertain about the language they will use for the project. Furthermore the source code of each team would be visible to all of the other teams.
+
+The solution we finally chose was to interact between the programms per Std-In/Std-Out. This approach doesn't force the teams to use the same language but needs an additional program (GameMaster) that synchronizes the communication between the teams' programs. Unfortunately it turned out that this approach slows down the execution time significantly, because Std-In/Std-Out communication seems to be quite slow.
+
+Implementing the GameMaster was no big deal but it took some time for the teams to implement the protocol in their projects correctly. One major problem was the fact that the teams used different Java versions. There is no backwards compatibility between Java 6 and 7 so if a project was compiled with Java 7 it couldn't be executed on machines with older Java versions. Therefore it was necessary for all teams to upgrade their Java versions.
+
+After all the problems have been eliminated a bash script was written to execute the GameMaster for all given programs. There were 10 competitions with 1000 games each. The execution time of the tournament script was 6 hours.
+
+Although there weren't many points of contact between the teams during the implementation period it was still a lot of fun to develop a protocol collectively and finding bugs in different projects.
+
+It was a great idea to organize a tournament between different teams. This way you can see the result of your efforts directly and compare it with other teams. Also, working with students from other countries and cultures gave us an insight into their different way of thinking.
