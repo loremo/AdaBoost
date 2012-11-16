@@ -1,6 +1,7 @@
 package classifier.NBC;
 
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Set;
 
 import classifier.IHypothesis;
