@@ -41,10 +41,11 @@ public class DataDiscretizer {
 
 	}
 
+	public static int NUMBEROFINTERVALS = 5;
+	
 	private ArrayList<ClassIntervals> computeIntervalls() {
 		// TODO: actual number of classes < computed number of classes
 		// int numberOfIntervals = Math.max((int) Math.ceil(Math.pow(data.size(), 1.0 / 20.0)), 3); // N^(1/3)
-		int numberOfIntervals = 5;
 
 //		int sampleSize = (int) (Math.log(data.size()) * 42); // TODO: uncomment again
 		 int sampleSize = data.size();
@@ -65,10 +66,10 @@ public class DataDiscretizer {
 			Collections.sort(samples.get(i));
 		}
 		ArrayList<ClassIntervals> intervals = new ArrayList<ClassIntervals>();
-		double intervalSize = (double) sampleSize / (double) numberOfIntervals;
+		double intervalSize = (double) sampleSize / (double) NUMBEROFINTERVALS;
 		for (int i = 0; i < numberOfFeatures; i++) {
 			ClassIntervals intervallForOneAttribute = new ClassIntervals();
-			for (int j = 1; j < numberOfIntervals; j++) {
+			for (int j = 1; j < NUMBEROFINTERVALS; j++) {
 				intervallForOneAttribute.addIntervallThreshold(samples.get(i).get((int) (j * intervalSize)));
 			}
 			intervals.add(intervallForOneAttribute);
