@@ -37,7 +37,7 @@
 
   % Inhalt
   
-  \begin{spacing}{1.4}\input{content/results}
+  \begin{spacing}{1.6}\input{content/results}
   \input{content/evaluation}
   \end{spacing}
 \end{document}

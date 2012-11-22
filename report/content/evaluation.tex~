@@ -1,6 +1,10 @@
 \chapter{Evaluation}
 \label{ch:evaluation}
 
+Boosting bringt meist ein bisschen was, aber weniger als erwartet
+NBC und DTC tuen sich schwer bei nicht separierbaren Problemen (Datensätze nicht in in Report aufgenommen) - interessant wären Ansätze wie KNN oder SVM
+AdaBoost hat einige Schwachstellen (negativ bewertete Hypothesen können mehr aussagen als positiv bewertete, overfitting)
+
 The first interesting fact is that even thought NBC is a very weak classifier, the results are quite satisfying even without boosting. 
 All the data sets contain multi class problems, for example the data set \emph{vowel-context} (table \ref{tab:vowel-context}) 
 has 11 different labels, so the apriori probability for a class would be 9,1\%.

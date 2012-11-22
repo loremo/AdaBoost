@@ -30,6 +30,7 @@
 
 % Zeilenabstand
 \usepackage[onehalfspacing]{setspace}
+\usepackage{spacing}
 
 % Index-Erstellung
 \usepackage{makeidx}
