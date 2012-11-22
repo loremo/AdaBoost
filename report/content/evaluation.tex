@@ -1,11 +1,33 @@
 \chapter{Evaluation}
 \label{ch:evaluation}
 
-DTC besser als NBC
-DTC A besser als DTC 2, DTC 2 besser als DTC 1
-NBC + DTC nicht besser als nur DTC
+unterschied train und test
+standardabweichung
 Boosting bringt meist ein bisschen was, aber weniger als erwartet
 NBC hat hohe Std Deviation
 Train Acc Avg schlechter als Test Acc (da nicht gewichtet)
 NBC und DTC tuen sich schwer bei nicht separierbaren Problemen (Datensätze nicht in in Report aufgenommen) - interessant wären Ansätze wie KNN oder SVM
 AdaBoost hat einige Schwachstellen (negativ bewertete Hypothesen können mehr aussagen als positiv bewertete, overfitting)
+
+The first interesting fact is that even thought NBC is a very weak classifier, the results are quite satisfying even without boosting. 
+All the data sets contain multi class problems, for example the data set \emph{vowel-context} (table \ref{tab:vowel-context}) 
+has 11 different labels, so the apriori probability for a class would be 9,1\%.
+One single NBC still classifies 64\% of the test instances correctly. However, the improvement with increasing number of NBCs
+is not very big. In some cases like \emph{pendigits} (table \ref{tab:pendigits}) there is even a decrease of the test accuracy from 10 to 20 NBCs.
+The reason for that might be that the weight of a hypothesis is not computed on the basis of the majority of instances but on their weights. 
+In case when only few instances could be classified by a hypothesis the hypothesis still can have a big weight when these instances also have big weights.
+
+DTC has proved to be better than NBC. In data sets shown above DTC is about 3-8\% better than NBC. This is reasonable because NBC uses
+the naive assumption that all of the features are conditionally independent of one another. DTC considers the dependencies and is
+therefore better. At least, when the decision tree is deep enogh. As shown in \emph{pendigits} (table \ref{tab:pendigits}) and 
+\emph{segment} (table \ref{tab:segment}) the performance of DTC is very poor at depth 1. Similar to NBC, there is only single digit
+percentage increase after using a higher number of hypotheses.
+
+Unfortunately, there is no increase in accuracy after using both classifiers. The reason for that is that after NBC is done 
+classifying, the weights of most instances are very small so that DTC only concentrates on "bad" or inconsistent instances. 
+Additionally, the depth of DTC is only 2 which is not as good as infinit depth.
+
+The difference between train and test accuracy is partly huge. The reason for that is that for the average training accuracy all 
+hypotheses are considered equal, that means that their weights aren't taken into account. So, even if a hypothesis
+the test accuracy is based on weighted 
+hypotheses while the train accuracy is unweighted. That means that 
